@@ -26,10 +26,18 @@ import 'assets/style.css';
 const HomePage = () => {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   const [selectedTiles, setSelectedTiles] = useState<number[]>([]);
+
+  const handleOpenModal = () => {
+    setOpen(true);
+    document.body.classList.add('no-scroll');
+  };
+
+  const handleCloseModal = () => {
+    setOpen(false);
+    document.body.classList.remove('no-scroll');
+  };
 
   const handleClick = (n: number) => {
     setSelectedTiles(prevSelectedTiles => {
@@ -110,7 +118,7 @@ const HomePage = () => {
     return () => {
       window.removeEventListener('resize', updateTileSize);
     };
-  }, []);
+  }, [window]);
 
 
   return (
@@ -126,11 +134,11 @@ const HomePage = () => {
               </div>
               <div className='mainImageContainer'>
                 <h2 className='mainImageText'><b>Click to expand</b></h2>
-                <img src={MainImage} onClick={handleOpen} className='mainImage'></img>
+                <img src={MainImage} onClick={handleOpenModal} className='mainImage'></img>
                 <Modal
                   keepMounted
                   open={open}
-                  onClose={handleClose}
+                  onClose={handleCloseModal}
                   aria-labelledby="keep-mounted-modal-title"
                   aria-describedby="keep-mounted-modal-description"
                 >
@@ -169,7 +177,7 @@ const HomePage = () => {
                         })
                       ))}
                     </div>
-                    <img src={closeicon} alt='closeicon' onClick={handleClose} className='closeIcon'></img>
+                    <img src={closeicon} alt='closeicon' onClick={handleCloseModal} className='closeIcon'></img>
                   </Box>
                 </Modal>
 
