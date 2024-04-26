@@ -136,7 +136,6 @@ const HomePage = () => {
                 <h2 className='mainImageText'><b>Click to expand</b></h2>
                 <img src={MainImage} onClick={handleOpenModal} className='mainImage'></img>
                 <Modal
-                  keepMounted
                   open={open}
                   onClose={handleCloseModal}
                   aria-labelledby="keep-mounted-modal-title"
